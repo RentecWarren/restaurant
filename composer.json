@@ -1,0 +1,13 @@
+{
+    "require": {
+        "symfony/console": "^7.0"
+    },
+    "bin": [
+        "bin/restaurant-cli"
+    ],    
+    "autoload": {
+        "psr-4": {
+            "Restaurant\\": "src/"
+        }
+    }    
+}
