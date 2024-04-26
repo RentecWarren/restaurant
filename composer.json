@@ -3,14 +3,18 @@
         "symfony/console": "^7.0",
         "php": ">=8.1",
         "ext-pdo_sqlite": "*",
-        "doctrine/orm": "2.*"        
+        "doctrine/orm": "2.*",  
+        "symfony/cache": "^6.2",
+        "symfony/dependency-injection": "^6.2",
+        "symfony/config": "^6.2"                
     },
     "bin": [
         "bin/restaurant-cli"
     ],    
     "autoload": {
         "psr-4": {
-            "Restaurant\\": "src/"
+            "Restaurant\\": "src/",
+            "App\\": "src/"
         }
     }    
 }
