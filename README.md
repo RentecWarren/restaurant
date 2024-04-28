@@ -24,7 +24,7 @@ $ php bin/doctrine orm:schema-tool:create
 ### List available commands
 
 ```bash
-$ php bin/console
+$ php bin/restaurant-cli 
 ```
 
 ## Credentials
