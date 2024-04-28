@@ -19,13 +19,18 @@ Crete DB
 $ php bin/doctrine orm:schema-tool:create
 ```
 
-## Execute commands
+## Demo commands
 
-### List available commands
+### Execute each command, in sequence
 
 ```bash
-$ php bin/restaurant-cli 
+$ php bin/restaurant-cli app:order
+$ php bin/restaurant-cli app:create-customers
 ```
+```bash
+$ php bin/restaurant-cli app:create-customers
+```
+
 
 ## Credentials
 
