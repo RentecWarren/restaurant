@@ -13,7 +13,7 @@ $ composer install
 
 ## Setup
 
-Crete DB
+Create DB
 
 ```bash
 $ php bin/doctrine orm:schema-tool:create
