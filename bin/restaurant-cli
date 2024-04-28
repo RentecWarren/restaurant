@@ -2,6 +2,7 @@
 <?php
 
 use Restaurant\Commands\MenuCommand;
+use Restaurant\Commands\OrderCommand;
 use Symfony\Component\Console\Application;
 
 if (file_exists(__DIR__ . '/../../../autoload.php')) {
@@ -17,6 +18,6 @@ $app = new Application('Pizza Restaurant', '1.0.0');
 //$app->setDefaultCommand("hello");
 
 $app->add(new MenuCommand());
-// $app->add(new AnotherCommand());
+$app->add(new OrderCommand());
 
 $app->run();
