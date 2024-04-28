@@ -24,12 +24,12 @@ $ php bin/doctrine orm:schema-tool:create
 ### Execute each command, in sequence
 
 ```bash
-$ php bin/restaurant-cli app:final-order
-$ php bin/restaurant-cli app:create-customers
-$ php bin/restaurant-cli app:view-menu
-$ php bin/restaurant-cli app:place-orders
-$ php bin/restaurant-cli app:final-order
-$ php bin/restaurant-cli app:export-order-xml
+$ php bin/restaurant-cli final-order
+$ php bin/restaurant-cli create-customers
+$ php bin/restaurant-cli view-menu
+$ php bin/restaurant-cli place-orders
+$ php bin/restaurant-cli final-order
+$ php bin/restaurant-cli export-order-xml
 ```
 ### Run Tests
 
