@@ -1,5 +1,9 @@
-Warren's Commnand Line Restaurant - Savvior Demo
+Savvior Demo - Command Line Restaurant 
 ===============
+
+- Small business use case  
+- Doctrine ORM 
+- Test Driven Development
 
 ## Installation
 
