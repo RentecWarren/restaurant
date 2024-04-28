@@ -34,7 +34,7 @@ $ php bin/restaurant-cli export-order-xml
 ### Run Tests
 
 ```bash
-$ php bin/restaurant-cli app:final-order
+$ ./vendor/phpunit/phpunit/phpunit tests/Util/UtilTest.php
 ```
 
 ## Credentials
