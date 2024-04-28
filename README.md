@@ -35,7 +35,7 @@ $ php bin/restaurant-cli export-orders-xml
 ### Run Tests
 
 ```bash
-$ ./vendor/phpunit/phpunit/phpunit tests/Util/UtilTest.php
+$ ./vendor/phpunit/phpunit/phpunit --configuration phpunit-config.xml --testsuite InputValidation
 ```
 
 ## Credentials

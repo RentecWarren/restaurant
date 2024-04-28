@@ -1,0 +1,5 @@
+<testsuites>
+  <testsuite name="InputValidation">
+    <file>tests/UtilTest.php</file>
+  </testsuite>
+</testsuites>
