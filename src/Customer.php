@@ -11,23 +11,36 @@ class Customer
     #[ORM\Id]
     #[ORM\Column(type: 'integer')]
     #[ORM\GeneratedValue]
-    private ?int $id;
+    private int $id;
 
     #[ORM\Column(type: 'string')]
-    private string $name;
+    private string $firstName;
 
-    public function getId(): ?int
+    #[ORM\Column(type: 'string')]
+    private string $lastName;
+
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getName(): string
+    public function getFirstName(): string
     {
-        return $this->name;
+        return $this->firstName;
     }
 
-    public function setName($name): void
+    public function setFirstName($firstName): void
     {
-        $this->name = $name;
+        $this->firstName = $firstName;
+    }
+
+    public function getLastName(): string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName($lastName): void
+    {
+        $this->lastName = $lastName;
     }
 }

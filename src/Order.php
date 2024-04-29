@@ -11,23 +11,36 @@ class Order
     #[ORM\Id]
     #[ORM\Column(type: 'integer')]
     #[ORM\GeneratedValue]
-    private ?int $id;
+    private int $id;
 
-    #[ORM\Column(type: 'string')]
-    private string $name;
+    #[ORM\Column(type: 'integer')]
+    private int $customerId;
 
-    public function getId(): ?int
+    #[ORM\Column(type: 'integer')]
+    private int $menuItemId;
+
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getName(): string
+    public function getCustomerId(): int
     {
-        return $this->name;
+        return $this->customerId;
     }
 
-    public function setName($name): void
+    public function setCustomerId($customerId): void
     {
-        $this->name = $name;
+        $this->customerId = $customerId;
+    }
+
+    public function getMenuItemId(): int
+    {
+        return $this->menuItemId;
+    }
+
+    public function setMenuItem($menuItemId): void
+    {
+        $this->menuItemId = $menuItemId;
     }
 }

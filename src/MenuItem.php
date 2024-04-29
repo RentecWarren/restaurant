@@ -11,23 +11,36 @@ class Menu
     #[ORM\Id]
     #[ORM\Column(type: 'integer')]
     #[ORM\GeneratedValue]
-    private ?int $id;
+    private int $id;
 
     #[ORM\Column(type: 'string')]
-    private string $name;
+    private string $foodName;
 
-    public function getId(): ?int
+    #[ORM\Column(type: 'float')]
+    private float $price;
+
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getName(): string
+    public function getFoodName(): string
     {
-        return $this->name;
+        return $this->foodName;
     }
 
-    public function setName($name): void
+    public function setFoodName($foodName): void
     {
-        $this->name = $name;
+        $this->foodName = $foodName;
+    }
+
+    public function getPrice(): float
+    {
+        return $this->price;
+    }
+
+    public function setPrice($price): void
+    {
+        $this->price = $price;
     }
 }
