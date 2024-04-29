@@ -1,4 +1,4 @@
-Savvior Demo - Restaurant Order Export
+Restaurant Order Export Demo
 ===============
 
 - Small business use case  
