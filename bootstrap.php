@@ -3,12 +3,8 @@
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
-use Symfony\Component\Config\FileLocator;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 
 require_once __DIR__ . "/vendor/autoload.php";
-require_once __DIR__ . "/config/services.php";
 require_once __DIR__ . "/src/Util/ValidInput.php";
 
 
@@ -24,13 +20,6 @@ $connection = DriverManager::getConnection([
 
 // obtaining the entity manager
 $entityManager = new EntityManager($connection, $config);
-
-$containerBuilder = new ContainerBuilder();
-
-$containerBuilder->set('doctrine.orm.entity_manager', $entityManager);
-
-$loader = new PhpFileLoader($containerBuilder, new FileLocator(__DIR__));
-$loader->load('config/services.php');
 
 
 

@@ -4,14 +4,14 @@ namespace App;
 
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: MenuItemRepository::class)]
 #[ORM\Table(name: 'menuitems')]
-class Menu
+class MenuItem
 {
     #[ORM\Id]
     #[ORM\Column(type: 'integer')]
     #[ORM\GeneratedValue]
-    private int $id;
+    private ?int $id;
 
     #[ORM\Column(type: 'string')]
     private string $foodName;
@@ -19,7 +19,7 @@ class Menu
     #[ORM\Column(type: 'float')]
     private float $price;
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }

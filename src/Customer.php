@@ -10,7 +10,6 @@ class Customer
 {
     #[ORM\Id]
     #[ORM\Column(type: 'integer')]
-    #[ORM\GeneratedValue]
     private int $id;
 
     #[ORM\Column(type: 'string')]
@@ -18,10 +17,14 @@ class Customer
 
     #[ORM\Column(type: 'string')]
     private string $lastName;
-
+    
     public function getId(): int
     {
         return $this->id;
+    }
+    public function setId($id): void
+    {
+        $this->id = $id;
     }
 
     public function getFirstName(): string

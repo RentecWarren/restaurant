@@ -2,12 +2,19 @@
 
 namespace App\Commands;
 
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use App\MenuItem;
 
 class CreateMenuCommand extends Command
 {
+    public function __construct(private readonly ObjectManager $entityManager)
+    {
+        parent::__construct();
+    }
+    
     protected function configure()
     {
         $this
@@ -18,6 +25,21 @@ class CreateMenuCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $menuItems = [
+            "Burger" =>  9.00,
+            "Fries" =>  5.00,
+            "Pizza" =>  12.00,
+            "Salad" =>  10.00,
+        ];
+
+        foreach ($menuItems as $foodName => $price) {
+            $menuItem = new MenuItem();
+            $menuItem->setFoodName((string)$foodName);
+            $menuItem->setPrice((float)$price);
+            $this->entityManager->persist($menuItem);
+            $this->entityManager->flush();    
+        }
+
         $output->writeln("Menu has been created.\n");
 
         return Command::SUCCESS;
