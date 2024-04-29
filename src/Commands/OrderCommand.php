@@ -1,6 +1,6 @@
 <?php
 
-namespace Restaurant\Commands;
+namespace App\Commands;
 
 require_once __DIR__ . "/../Util/ValidInput.php";
 
