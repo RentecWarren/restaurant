@@ -4,13 +4,14 @@ namespace App;
 
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: CustomerRepository::class)]
 #[ORM\Table(name: 'customers')]
 class Customer
 {
     #[ORM\Id]
     #[ORM\Column(type: 'integer')]
-    private int $id;
+    #[ORM\GeneratedValue]
+    private ?int $id;
 
     #[ORM\Column(type: 'string')]
     private string $firstName;
@@ -18,13 +19,9 @@ class Customer
     #[ORM\Column(type: 'string')]
     private string $lastName;
     
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
-    }
-    public function setId($id): void
-    {
-        $this->id = $id;
     }
 
     public function getFirstName(): string

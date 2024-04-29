@@ -32,15 +32,24 @@ class CreateMenuCommand extends Command
             "Salad" =>  10.00,
         ];
 
-        foreach ($menuItems as $foodName => $price) {
-            $menuItem = new MenuItem();
-            $menuItem->setFoodName((string)$foodName);
-            $menuItem->setPrice((float)$price);
-            $this->entityManager->persist($menuItem);
-            $this->entityManager->flush();    
+        $menuItemCount = $this->entityManager->getRepository(MenuItem::class)->getMenuItemsCount();
+
+        if($menuItemCount === 0){
+            foreach ($menuItems as $foodName => $price) {
+                $menuItem = new MenuItem();
+                $menuItem->setFoodName((string)$foodName);
+                $menuItem->setPrice((float)$price);
+                $this->entityManager->persist($menuItem);
+                $this->entityManager->flush();    
+            }    
         }
 
         $output->writeln("Menu has been created.\n");
+        $menuItems = $this->entityManager->getRepository(MenuItem::class)->getMenuItems();
+        $output->writeln("Here is the Menu.\n");
+        foreach ($menuItems as $menuItem) {
+            $output->writeln($menuItem['foodName'] . ", price is $" . $menuItem['price']);
+        }
 
         return Command::SUCCESS;
     }

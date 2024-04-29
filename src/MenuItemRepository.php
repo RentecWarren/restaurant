@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityRepository;
 use App\MenuItem;
 
@@ -13,7 +12,16 @@ class MenuItemRepository extends EntityRepository
     {
         $dql = "SELECT m.id, m.foodName, m.price FROM App\MenuItem m";
 
-        return $this->getEntityManager()->createQuery($dql)
-            ->getScalarResult();
+        return $this->getEntityManager()
+            ->createQuery($dql)
+            ->getArrayResult();
+    }
+    public function getMenuItemsCount(): int
+    {
+        $dql = "SELECT count(m.id) as total_menu_items FROM App\MenuItem m";
+
+        return $this->getEntityManager()
+            ->createQuery($dql)
+            ->getScalarResult()[0]['total_menu_items'];
     }
 }

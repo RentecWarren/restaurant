@@ -27,7 +27,7 @@ $app->add(new MenuCommand());
 $app->add(new ViewOrdersCommand());
 $app->add(new ViewMenuCommand($entityManager));
 $app->add(new PlaceOrdersCommand());
-$app->add(new CreateCustomersCommand());
+$app->add(new CreateCustomersCommand($entityManager));
 $app->add(new CreateMenuCommand($entityManager));
 $app->add(new ExportOrdersXMLCommand());
 
