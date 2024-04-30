@@ -3,19 +3,27 @@
 namespace App;
 
 use Doctrine\ORM\EntityRepository;
-use App\Order;
+// use App\Order;
 use ArrayObject;
 
 /** @return Order[] */
 class OrderRepository extends EntityRepository
 {
-     /** @return Order[] */
-    public function myOrders(): array
+    public function getOrders(): array
     {
-        $dql = "SELECT o, c, m FROM App\Order o JOIN o.customer c JOIN o.menuitem m";
+        $dql = "SELECT o.id, c.firstName, c.lastName, m.foodName, m.price FROM App\Order o JOIN o.customer c JOIN o.menu m";
 
         return $this->getEntityManager()
             ->createQuery($dql)
-            ->getResult();
-    }    
+            ->getScalarResult();
+    }
+    
+    public function getOrdersCount(): int
+    {
+        $dql = "SELECT count(o.id) as total_orders FROM App\Order o";
+
+        return $this->getEntityManager()
+            ->createQuery($dql)
+            ->getScalarResult()[0]['total_orders'];
+    }        
 }
