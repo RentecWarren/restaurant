@@ -2,7 +2,10 @@
 
 namespace App;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'orders')]
@@ -13,34 +16,36 @@ class Order
     #[ORM\GeneratedValue]
     private int $id;
 
-    #[ORM\Column(type: 'integer')]
-    private int $customerId;
+    #[ORM\OneToOne(targetEntity: Customer::class, inversedBy:'order')]
+    #[ORM\JoinColumn(name:'customer_id', referencedColumnName:'id', nullable: true)]
+    private Customer|null $customer = null;
 
-    #[ORM\Column(type: 'integer')]
-    private int $menuItemId;
+    #[ORM\OneToOne(targetEntity: Menu::class, inversedBy:'order')]
+    #[ORM\JoinColumn(name:'menu_id', referencedColumnName:'id', nullable: true)]
+    private Menu|null $menu = null;
 
     public function getId(): int
     {
         return $this->id;
     }
 
-    public function getCustomerId(): int
+    public function getCustomer(): Customer|null
     {
-        return $this->customerId;
+        return $this->customer;
     }
 
-    public function setCustomerId($customerId): void
+    public function setCustomer($customer): void
     {
-        $this->customerId = $customerId;
+        // $customer->addOrder($this);
+        $this->customer = $customer;
+    }
+    public function getMenu(): Menu|null
+    {
+        return $this->menu;
     }
 
-    public function getMenuItemId(): int
+    public function setMenu($menu): void
     {
-        return $this->menuItemId;
-    }
-
-    public function setMenuItem($menuItemId): void
-    {
-        $this->menuItemId = $menuItemId;
+        $this->menu = $menu;
     }
 }

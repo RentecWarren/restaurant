@@ -6,7 +6,7 @@ use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use App\MenuItem;
+use App\Menu;
 
 class CreateMenuCommand extends Command
 {
@@ -25,30 +25,30 @@ class CreateMenuCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $menuItems = [
+        $menus = [
             "Burger" =>  9.00,
             "Fries" =>  5.00,
             "Pizza" =>  12.00,
             "Salad" =>  10.00,
         ];
 
-        $menuItemCount = $this->entityManager->getRepository(MenuItem::class)->getMenuItemsCount();
+        $menuCount = $this->entityManager->getRepository(Menu::class)->getMenusCount();
 
-        if($menuItemCount === 0){
-            foreach ($menuItems as $foodName => $price) {
-                $menuItem = new MenuItem();
-                $menuItem->setFoodName((string)$foodName);
-                $menuItem->setPrice((float)$price);
-                $this->entityManager->persist($menuItem);
+        if($menuCount === 0){
+            foreach ($menus as $foodName => $price) {
+                $menu = new Menu();
+                $menu->setFoodName((string)$foodName);
+                $menu->setPrice((float)$price);
+                $this->entityManager->persist($menu);
                 $this->entityManager->flush();    
             }    
         }
 
         $output->writeln("Menu has been created.\n");
-        $menuItems = $this->entityManager->getRepository(MenuItem::class)->getMenuItems();
+        $menus = $this->entityManager->getRepository(Menu::class)->getMenus();
         $output->writeln("Here is the Menu.\n");
-        foreach ($menuItems as $menuItem) {
-            $output->writeln($menuItem['foodName'] . ", price is $" . $menuItem['price']);
+        foreach ($menus as $menu) {
+            $output->writeln($menu['foodName'] . ", price is $" . $menu['price']);
         }
 
         return Command::SUCCESS;

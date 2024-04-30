@@ -2,12 +2,21 @@
 
 namespace App\Commands;
 
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use App\Order;
+use App\Customer;
+use App\Menu;
 
 class PlaceOrdersCommand extends Command
 {
+    public function __construct(private readonly ObjectManager $entityManager)
+    {
+        parent::__construct();
+    }
+
     protected function configure()
     {
         $this
@@ -18,7 +27,43 @@ class PlaceOrdersCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $output->writeln("Orders have been placed \n");
+        $orderRepository = $this->entityManager->getRepository(Order::class);
+        $orders = $orderRepository->findAll();
+
+        if(!$orders){
+            $customer = $this->entityManager->find(Customer::class, 1);
+            $menu = $this->entityManager->find(Menu::class, 1);
+            $order = new Order();
+            $order->setCustomer($customer);
+            $order->setMenu($menu);
+            $this->entityManager->persist($order);
+            $this->entityManager->flush();        
+            $output->writeln("Orders have been placed \n");
+        }
+
+        $orders = $orderRepository->findAll();
+
+        foreach($orders as $order){
+            var_dump(get_class($order));
+            var_dump($order->getCustomer());
+            var_dump($order->getMenu());
+
+            // foreach($order->getMenuItems() as $menuItem){
+            //     var_dump($menuItem);
+            // }
+
+            // var_dump(get_class($order->getMenuItems()));
+            // $collectionArray = $order->getMenuItems()->toArray();
+            // var_dump($order->getMenuItems()->toArray());
+    
+        }
+
+        // $orders = $orderRepository->findAll();
+        // foreach ($orders as $order) {
+        //     // $output->writeln($order->getMenuItems()[0]->getFoodName());
+        //     print_r($order->getMenuItems());
+        // }
+
 
         return Command::SUCCESS;
     }

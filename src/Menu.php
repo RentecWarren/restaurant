@@ -4,9 +4,9 @@ namespace App;
 
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: MenuItemRepository::class)]
-#[ORM\Table(name: 'menuitems')]
-class MenuItem
+#[ORM\Entity(repositoryClass: MenuRepository::class)]
+#[ORM\Table(name: 'menus')]
+class Menu
 {
     #[ORM\Id]
     #[ORM\Column(type: 'integer')]
