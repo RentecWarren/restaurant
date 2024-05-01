@@ -25,5 +25,14 @@ class OrderRepository extends EntityRepository
         return $this->getEntityManager()
             ->createQuery($dql)
             ->getScalarResult()[0]['total_orders'];
-    }        
+    }
+    
+    public function getOrderTotal(): float
+    {
+        $dql = "SELECT sum(m.price) as order_total FROM App\Order o JOIN o.menu m";
+
+        return $this->getEntityManager()
+            ->createQuery($dql)
+            ->getScalarResult()[0]['order_total'];
+    }            
 }

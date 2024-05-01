@@ -27,18 +27,13 @@ class PlaceOrdersCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-//        $orders = $this->entityManager->getRepository(Order::class)->getOrders();
-
         $orderCount = $this->entityManager->getRepository(Order::class)->getOrdersCount();
 
         if($orderCount === 0){
-            $customer = $this->entityManager->find(Customer::class, 3);
-            $menu = $this->entityManager->find(Menu::class, 4);
-            $order = new Order();
-            $order->setCustomer($customer);
-            $order->setMenu($menu);
-            $this->entityManager->persist($order);
-            $this->entityManager->flush();        
+            $menuIds = $this->getMenuIds();
+            $this->placeOrder(1, $menuIds[0]);
+            $this->placeOrder(2, $menuIds[1]); 
+            $this->placeOrder(3, $menuIds[2]); 
             $output->writeln("Orders have been placed \n");
         }
 
@@ -46,52 +41,37 @@ class PlaceOrdersCommand extends Command
 
         $output->writeln("Here are the Orders.\n");
         foreach ($orders as $order) {
+            $price = number_format($order['price'], 2, '.', ' ');
+
             $output->writeln($order['firstName'] 
             . " " . $order['lastName']
             . ", " . $order['foodName']
-            . " $" . $order['price']
+            . " $" . $price
             );
         }
 
+        $total = $this->entityManager->getRepository(Order::class)->getOrderTotal();
+        $total = number_format($total, 2, '.', ' ');
 
-        // $orderRepository = $this->entityManager->getRepository(Order::class);
-        // $orders = $orderRepository->findAll();
-
-        // if(!$orders){
-        //     $customer = $this->entityManager->find(Customer::class, 1);
-        //     $menu = $this->entityManager->find(Menu::class, 1);
-        //     $order = new Order();
-        //     $order->setCustomer($customer);
-        //     $order->setMenu($menu);
-        //     $this->entityManager->persist($order);
-        //     $this->entityManager->flush();        
-        //     $output->writeln("Orders have been placed \n");
-        // }
-
-        // $orders = $orderRepository->findAll();
-
-        // foreach($orders as $order){
-        //     var_dump(get_class($order));
-        //     var_dump($order->getCustomer());
-        //     var_dump($order->getMenu());
-
-        //     // foreach($order->getMenuItems() as $menuItem){
-        //     //     var_dump($menuItem);
-        //     // }
-
-        //     // var_dump(get_class($order->getMenuItems()));
-        //     // $collectionArray = $order->getMenuItems()->toArray();
-        //     // var_dump($order->getMenuItems()->toArray());
-    
-        // }
-
-        // // $orders = $orderRepository->findAll();
-        // // foreach ($orders as $order) {
-        // //     // $output->writeln($order->getMenuItems()[0]->getFoodName());
-        // //     print_r($order->getMenuItems());
-        // // }
-
+        $output->writeln("\nTotal = \${$total}.\n");
 
         return Command::SUCCESS;
+    }
+
+    private function getMenuIds(): array
+    {
+        $menuIds = [1, 2, 3, 4];
+        shuffle($menuIds);
+        return array_slice($menuIds, 0, 3);
+    }
+    private function placeOrder(int $customerId, int $menuId): void
+    {
+        $customer = $this->entityManager->find(Customer::class, $customerId);
+        $menu = $this->entityManager->find(Menu::class, $menuId);
+        $order = new Order();
+        $order->setCustomer($customer);
+        $order->setMenu($menu);
+        $this->entityManager->persist($order);
+        $this->entityManager->flush();        
     }
 }

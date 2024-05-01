@@ -26,10 +26,10 @@ class CreateMenuCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $menus = [
-            "Burger" =>  9.00,
-            "Fries" =>  5.00,
-            "Pizza" =>  12.00,
-            "Salad" =>  10.00,
+            "Burger" =>  9.50,
+            "Fries" =>  5.99,
+            "Pizza" =>  12.50,
+            "Salad" =>  10.99,
         ];
 
         $menuCount = $this->entityManager->getRepository(Menu::class)->getMenusCount();
@@ -48,7 +48,7 @@ class CreateMenuCommand extends Command
         $menus = $this->entityManager->getRepository(Menu::class)->getMenus();
         $output->writeln("Here is the Menu.\n");
         foreach ($menus as $menu) {
-            $output->writeln($menu['foodName'] . ", price is $" . $menu['price']);
+            $output->writeln($menu['foodName'] . ", price is $" . number_format($menu['price'], 2, '.', ' '));
         }
 
         return Command::SUCCESS;
