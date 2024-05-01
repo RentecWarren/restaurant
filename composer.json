@@ -6,15 +6,13 @@
         "doctrine/orm": "2.*",  
         "symfony/cache": "^6.2",
         "symfony/dependency-injection": "^6.2",
-        "symfony/config": "^6.2",
-        "phpunit/phpunit": "^11.0"                
+        "symfony/config": "^6.2"
     },
     "bin": [
         "bin/restaurant-cli"
     ],    
     "autoload": {
         "psr-4": {
-            "Restaurant\\": "src/",
             "App\\": "src/"
         }
     }    

@@ -5,7 +5,6 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
 
 require_once __DIR__ . "/vendor/autoload.php";
-require_once __DIR__ . "/src/Util/ValidInput.php";
 
 
 // Create a simple "default" Doctrine ORM configuration for Annotation Mapping

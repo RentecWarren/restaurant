@@ -4,7 +4,6 @@ namespace App;
 
 use Doctrine\ORM\EntityRepository;
 use App\Menu;
-use ArrayObject;
 
 /** @return Menu[] */
 class MenuRepository extends EntityRepository

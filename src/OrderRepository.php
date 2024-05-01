@@ -3,8 +3,6 @@
 namespace App;
 
 use Doctrine\ORM\EntityRepository;
-// use App\Order;
-use ArrayObject;
 
 /** @return Order[] */
 class OrderRepository extends EntityRepository

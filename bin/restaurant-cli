@@ -1,10 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-use Restaurant\Commands\MenuCommand;
-use App\Commands\ViewOrdersCommand;
 use App\Commands\PlaceOrdersCommand;
-use App\Commands\ExportOrdersXMLCommand;
 use App\Commands\CreateMenuCommand;
 use App\Commands\CreateCustomersCommand;
 use Symfony\Component\Console\Application;
@@ -25,9 +22,5 @@ $app = new Application("Alice's Bar and Restaurant", '1.0.0');
 $app->add(new CreateCustomersCommand($entityManager));
 $app->add(new CreateMenuCommand($entityManager));
 $app->add(new PlaceOrdersCommand($entityManager));
-
-$app->add(new MenuCommand());
-$app->add(new ViewOrdersCommand());
-$app->add(new ExportOrdersXMLCommand());
 
 $app->run();

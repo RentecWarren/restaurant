@@ -3,7 +3,6 @@
 namespace App;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\OneToOne;
 
 #[ORM\Entity(repositoryClass: CustomerRepository::class)]
 #[ORM\Table(name: 'customers')]
@@ -13,10 +12,6 @@ class Customer
     #[ORM\Column(type: 'integer')]
     #[ORM\GeneratedValue]
     private ?int $id;
-
-    /** One Customer can have one Order */
-    #[ORM\OneToOne(targetEntity: Order::class, mappedBy:'customer')]
-    private Order|null $order = null;
 
     #[ORM\Column(type: 'string')]
     private string $firstName;
