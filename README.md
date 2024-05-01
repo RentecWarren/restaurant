@@ -1,22 +1,30 @@
-Restaurant Order Export Demo
+Restaurant Order Demo
 ===============
 
-- Small business use case  
-- Doctrine ORM 
-- Test Driven Development
+Three musicians walk into a bar...that serves food. They checkout the menu and decide what they want to eat. Then they get an itemized bill with the total.
+
+This is a simple demonstration of using Doctrine ORM for a small business use case. The demo includes it's own Sqlite database. An XML export for consumption by a POS system, along with unit tests, are the next planned enhancements.  
 
 ## Installation
 
+Clone:
 ```bash
-$ composer install
+git clone https://github.com/RentecWarren/restaurant.git
 ```
 
-## Setup
+cd into directory:
+```bash
+cd restaurant
+```
+
+Install:
+```bash
+composer install
+```
 
 Create DB
-
 ```bash
-$ php bin/doctrine orm:schema-tool:create
+php bin/doctrine orm:schema-tool:create
 ```
 
 ## Demo
@@ -24,20 +32,13 @@ $ php bin/doctrine orm:schema-tool:create
 ### Execute each command, in sequence
 
 ```bash
-$ php bin/restaurant-cli view-orders
-$ php bin/restaurant-cli create-customers
-$ php bin/restaurant-cli create-menu
-$ php bin/restaurant-cli view-menu
-$ php bin/restaurant-cli place-orders
-$ php bin/restaurant-cli view-orders
-$ php bin/restaurant-cli export-orders-xml
-```
-### Run Tests
-
-```bash
-$ ./vendor/phpunit/phpunit/phpunit --configuration phpunit-config.xml --testsuite InputValidation
+php bin/restaurant-cli create-customers
+php bin/restaurant-cli create-menu 
+php bin/restaurant-cli place-orders
 ```
 
 ## Credentials
-
 Source repository: https://github.com/RentecWarren/restaurant
+
+## Disclaimer
+This demo was written with HUMAN intelligence. Have a great day!

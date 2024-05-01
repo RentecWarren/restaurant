@@ -44,12 +44,11 @@ class CreateCustomersCommand extends Command
             }    
         }
 
-        $output->writeln("Customers have been created.\n");
+        $output->writeln("Customers have been created, and they are:\n");
 
         $customers = $this->entityManager->getRepository(Customer::class)->getCustomers();
-        $output->writeln("Here are the customers:\n");
         foreach ($customers as $customer) {
-            $output->writeln($customer['id'] . ", " . $customer['firstName'] . " " . $customer['lastName'] . "\n");
+            $output->writeln($customer['firstName'] . " " . $customer['lastName']);
         }
         
         return Command::SUCCESS;

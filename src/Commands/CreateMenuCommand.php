@@ -44,9 +44,8 @@ class CreateMenuCommand extends Command
             }    
         }
 
-        $output->writeln("Menu has been created.\n");
+        $output->writeln("The menu has been created, and here it is:\n");
         $menus = $this->entityManager->getRepository(Menu::class)->getMenus();
-        $output->writeln("Here is the Menu.\n");
         foreach ($menus as $menu) {
             $output->writeln($menu['foodName'] . ", price is $" . number_format($menu['price'], 2, '.', ' '));
         }

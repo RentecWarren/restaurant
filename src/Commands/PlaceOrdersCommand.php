@@ -34,12 +34,11 @@ class PlaceOrdersCommand extends Command
             $this->placeOrder(1, $menuIds[0]);
             $this->placeOrder(2, $menuIds[1]); 
             $this->placeOrder(3, $menuIds[2]); 
-            $output->writeln("Orders have been placed \n");
+            $output->writeln("Orders have been placed. Here are the orders and the total bill: \n");
         }
 
         $orders = $this->entityManager->getRepository(Order::class)->getOrders();
 
-        $output->writeln("Here are the Orders.\n");
         foreach ($orders as $order) {
             $price = number_format($order['price'], 2, '.', ' ');
 
@@ -52,7 +51,6 @@ class PlaceOrdersCommand extends Command
 
         $total = $this->entityManager->getRepository(Order::class)->getOrderTotal();
         $total = number_format($total, 2, '.', ' ');
-
         $output->writeln("\nTotal = \${$total}.\n");
 
         return Command::SUCCESS;
